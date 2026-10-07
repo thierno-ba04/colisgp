@@ -1,0 +1,58 @@
+/* 🎨 Cards gradient */
+.stat-card {
+  border-radius: 15px;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* ✨ Hover */
+.stat-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* 🌈 Backgrounds */
+.bg-primary-gradient {
+  background: linear-gradient(135deg, #4e73df, #224abe);
+}
+
+.bg-success-gradient {
+  background: linear-gradient(135deg, #1cc88a, #17a673);
+}
+
+.bg-warning-gradient {
+  background: linear-gradient(135deg, #f6c23e, #dda20a);
+}
+
+/* 👤 Avatar */
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #4e73df;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* 📦 Card global hover */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* 🔍 Input focus */
+.form-control:focus {
+  border-color: #4e73df;
+  box-shadow: 0 0 0 0.2rem rgba(78,115,223,0.25);
+}
+
+
+

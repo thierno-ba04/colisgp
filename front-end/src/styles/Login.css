@@ -1,0 +1,196 @@
+/* .login-page{
+    min-height:100vh;
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    display:flex;
+    align-items:center;
+}
+
+.login-card{
+    border:none;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+    background:white;
+    padding:20px;
+}
+
+.login-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.login-logo{
+    width:70px;
+    margin-bottom:10px;
+}
+
+.login-title{
+    font-weight:700;
+}
+
+.login-subtitle{
+    font-size:14px;
+    color:#64748b;
+}
+
+.input-group-custom{
+    position:relative;
+}
+
+.input-group-custom input{
+    padding-left:40px;
+    height:45px;
+    border-radius:8px;
+}
+
+.input-icon{
+    position:absolute;
+    left:12px;
+    top:13px;
+    color:#64748b;
+}
+
+.toggle-password{
+    position:absolute;
+    right:12px;
+    top:13px;
+    cursor:pointer;
+    color:#64748b;
+}
+
+.login-btn{
+    height:45px;
+    border-radius:8px;
+    font-weight:600;
+    background:#2563eb;
+    border:none;
+}
+
+.login-btn:hover{
+    background:#1d4ed8;
+}
+
+.forgot-link{
+    font-size:13px;
+    text-decoration:none;
+}
+
+.forgot-link:hover{
+    text-decoration:underline;
+}
+
+.copyright{
+    margin-top:15px;
+    color:white;
+    font-size:13px;
+} */
+
+
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+}
+
+/* CARD */
+
+.login-card {
+  border: none;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+}
+
+/* HEADER */
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.login-header h3 {
+  font-weight: 700;
+}
+
+.login-header p {
+  color: gray;
+  font-size: 14px;
+}
+
+/* INPUT */
+
+.input-group-custom {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: gray;
+}
+
+.input-group-custom input {
+  padding-left: 35px;
+  border-radius: 8px;
+}
+
+/* SHOW PASSWORD */
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+  color: gray;
+}
+
+/* BUTTON */
+
+.login-btn {
+  background: linear-gradient(90deg,#007bff,#00c6ff);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+}
+
+/* FORGOT */
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 15px;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  text-decoration: none;
+}
+
+/* FOOTER */
+
+.copyright {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+/* LOADING */
+
+.loading{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-size:20px;
+}

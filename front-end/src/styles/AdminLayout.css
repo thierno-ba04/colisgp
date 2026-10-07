@@ -1,0 +1,168 @@
+/* Conteneur global */
+.admin-layout {
+  display: flex;
+}
+
+/* Sidebar fixe */
+.sidebar-new {
+  position: fixed;       /* Fixe la sidebar à gauche */
+  top: 0;
+  left: 0;
+  height: 100vh;         /* Hauteur pleine */
+  width: 250px;          /* Largeur sidebar */
+  background-color: #1c1c1c;
+  color: #fff;
+  overflow-y: auto;      /* Scroll si contenu dépasse */
+  z-index: 1000;
+  transition: width 0.3s;
+}
+
+/* Sidebar collapsee */
+.sidebar-new.collapsed {
+  width: 80px;
+}
+
+/* Contenu principal */
+.admin-content {
+  margin-left: 250px; /* Décalage pour sidebar */
+  padding: 20px;
+  width: 100%;
+  transition: margin-left 0.3s;
+}
+
+/* Quand sidebar collapsée */
+.sidebar-new.collapsed + .admin-content {
+  margin-left: 80px;
+}
+
+/* Scroll sur le contenu indépendant */
+.admin-content {
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+
+
+/* ================= TABLETTE ================= */
+@media (min-width: 769px) and (max-width: 992px) {
+
+  /* ❌ cacher le bouton toggle */
+  .mobile-toggle-btn {
+    display: none !important;
+  }
+
+  /* ❌ enlever overlay si jamais */
+  .sidebar-overlay {
+    display: none !important;
+  }
+
+  /* Sidebar toujours visible */
+  .sidebar-new {
+    left: 0 !important;
+  }
+
+  /* Ajustement contenu */
+  .admin-content {
+    margin-left: 250px;
+  }
+}
+
+
+
+
+/* Navbar */
+.navbar-admin {
+  height: 60px;
+  width: 100%;
+  background-color: #4049f3; /* couleur par défaut */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+.navbar-left h3 {
+  margin: 0;
+  color: #fff;
+}
+
+.navbar-right .dark-mode-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Sidebar */
+.sidebar-new {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #4049f3;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: fixed;
+  padding-top: 20px;
+  z-index: 1000;
+  left: 0;
+}
+
+/* Sidebar collapsed */
+.sidebar-new.collapsed {
+  width: 80px;
+}
+
+/* Menu actif / hover */
+.sidebar-menu-new li a:hover {
+  background-color: #0c0c0e;
+}
+.sidebar-menu-new li.active a {
+  background-color: #5a5ef5;
+}
+
+/* Admin content */
+.admin-content {
+  flex: 1;
+  padding: 80px 20px 20px 20px; /* top padding pour navbar */
+  margin-left: 250px;
+  transition: all 0.3s;
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode .navbar-admin {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .sidebar-new {
+  background-color: #2c2c2c;
+}
+
+body.dark-mode .sidebar-menu-new li a {
+  color: #f5f5f5;
+}
+
+body.dark-mode .sidebar-menu-new li a:hover {
+  background-color: #3a3a3a;
+}
+
+body.dark-mode .sidebar-menu-new li.active a {
+  background-color: #5555ff;
+}
+
+body.dark-mode .navbar-left h3,
+body.dark-mode .navbar-right .dark-mode-toggle {
+  color: #f5f5f5;
+}
