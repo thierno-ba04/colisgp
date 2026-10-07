@@ -194,3 +194,32 @@
   height:100vh;
   font-size:20px;
 }
+
+
+
+
+
+/* ============================= */
+/* MOT DE PASSE OUBLIE */
+/* ============================= */
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.forgot-password button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #4049f3;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.forgot-password button:hover {
+  color: #2932d6;
+  text-decoration: underline;
+}

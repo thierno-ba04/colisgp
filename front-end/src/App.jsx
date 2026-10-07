@@ -1,11 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import {
+  useState,
+  useEffect,
+} from "react";
+
 import { AuthProvider } from "./context/AuthContext";
+
 import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
-// Pages
+// ==========================================
+// PAGES
+// ==========================================
+
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+
 import DashboardAdmin from "./admin/DashboardAdmin";
 import Users from "./admin/pages/Users";
 import Colis from "./admin/pages/Colis";
@@ -15,133 +32,327 @@ import Statistiques from "./admin/pages/ColisParVoyage";
 import Notifications from "./admin/pages/Notifications";
 import Settings from "./admin/pages/Settings";
 
-// Layout + sécurité
+// ==========================================
+// LAYOUT + SÉCURITÉ
+// ==========================================
+
 import AdminLayout from "./admin/layout/AdminLayout";
 import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
 
-  // ✅ localStorage intégré pour les colis avec normalisation des dates
+  // ==========================================
+  // DONNÉES DES COLIS
+  // ==========================================
+
   const [colisData, setColisData] = useState(() => {
-    const saved = localStorage.getItem("colisData");
-    if (!saved) return [];
-    const parsed = JSON.parse(saved);
-    // 🔹 normalisation des dates
-    return parsed.map(c => ({
-      ...c,
-      date: c.date ? new Date(c.date).toISOString().split("T")[0] : ""
-    }));
+
+    const saved =
+      localStorage.getItem("colisData");
+
+    if (!saved) {
+      return [];
+    }
+
+    try {
+
+      const parsed = JSON.parse(saved);
+
+      return parsed.map((c) => ({
+        ...c,
+
+        date: c.date
+          ? new Date(c.date)
+              .toISOString()
+              .split("T")[0]
+          : "",
+      }));
+
+    } catch (error) {
+
+      console.error(
+        "Erreur chargement colis :",
+        error
+      );
+
+      return [];
+    }
   });
 
-  // sauvegarde automatique
+  // ==========================================
+  // SAUVEGARDE AUTOMATIQUE
+  // ==========================================
+
   useEffect(() => {
-    localStorage.setItem("colisData", JSON.stringify(colisData));
+
+    localStorage.setItem(
+      "colisData",
+      JSON.stringify(colisData)
+    );
+
   }, [colisData]);
 
-  // Passer un colis en transit
+  // ==========================================
+  // PASSER EN TRANSIT
+  // ==========================================
+
   const handleTransit = (id) => {
-    setColisData(prev =>
-      prev.map(c => c.id === id ? { ...c, statut: "En transit" } : c)
+
+    setColisData((prev) =>
+      prev.map((c) =>
+        c.id === id
+          ? {
+              ...c,
+              statut: "En transit",
+            }
+          : c
+      )
     );
+
   };
 
-  // Passer un colis en livré
+  // ==========================================
+  // PASSER EN LIVRÉ
+  // ==========================================
+
   const handleLivrer = (id) => {
-    setColisData(prev =>
-      prev.map(c => c.id === id ? { ...c, statut: "Livré" } : c)
+
+    setColisData((prev) =>
+      prev.map((c) =>
+        c.id === id
+          ? {
+              ...c,
+              statut: "Livré",
+            }
+          : c
+      )
     );
+
   };
 
   return (
+
     <AuthProvider>
+
       <BrowserRouter>
-        <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+
+        {/* ======================================
+            TOAST
+        ======================================= */}
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          theme="colored"
+        />
+
         <Routes>
 
-          <Route path="/" element={<Login />} />
+          {/* ======================================
+              LOGIN
+          ======================================= */}
 
-          <Route path="/admin/dashboard" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <DashboardAdmin
-                  colisData={colisData}
-                  setColisData={setColisData}
-                />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+          <Route
+            path="/"
+            element={<Login />}
+          />
 
-          <Route path="/admin/users" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <Users />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+          {/* ======================================
+              MOT DE PASSE OUBLIÉ
+          ======================================= */}
 
-          <Route path="/admin/colis" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <Colis
-                  colisData={colisData}
-                  setColisData={setColisData}
-                  onTransit={handleTransit}
-                />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
+          />
 
-          <Route path="/admin/colis-transit" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <ColisTransit
-                  colisData={colisData}
-                  setColisData={setColisData}
-                  onLivrer={handleLivrer}
-                />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+          {/* ======================================
+              DASHBOARD
+          ======================================= */}
 
-          <Route path="/admin/colis-livres" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <ColisLivres
-                  colisData={colisData}
-                  setColisData={setColisData}
-                />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+          <Route
+            path="/admin/dashboard"
+            element={
+              <PrivateRoute>
 
-          <Route path="/admin/statistiques" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <Statistiques colisData={colisData} />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+                <AdminLayout>
 
-          <Route path="/admin/notifications" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <Notifications />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+                  <DashboardAdmin
+                    colisData={colisData}
+                    setColisData={
+                      setColisData
+                    }
+                  />
 
-          <Route path="/admin/settings" element={
-            <PrivateRoute>
-              <AdminLayout>
-                <Settings />
-              </AdminLayout>
-            </PrivateRoute>
-          }/>
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              USERS
+          ======================================= */}
+
+          <Route
+            path="/admin/users"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <Users />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              COLIS
+          ======================================= */}
+
+          <Route
+            path="/admin/colis"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <Colis
+                    colisData={colisData}
+                    setColisData={
+                      setColisData
+                    }
+                    onTransit={
+                      handleTransit
+                    }
+                  />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              COLIS TRANSIT
+          ======================================= */}
+
+          <Route
+            path="/admin/colis-transit"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <ColisTransit
+                    colisData={colisData}
+                    setColisData={
+                      setColisData
+                    }
+                    onLivrer={
+                      handleLivrer
+                    }
+                  />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              COLIS LIVRÉS
+          ======================================= */}
+
+          <Route
+            path="/admin/colis-livres"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <ColisLivres
+                    colisData={colisData}
+                    setColisData={
+                      setColisData
+                    }
+                  />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              STATISTIQUES
+          ======================================= */}
+
+          <Route
+            path="/admin/statistiques"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <Statistiques
+                    colisData={colisData}
+                  />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              NOTIFICATIONS
+          ======================================= */}
+
+          <Route
+            path="/admin/notifications"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <Notifications />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
+
+          {/* ======================================
+              PARAMÈTRES
+          ======================================= */}
+
+          <Route
+            path="/admin/settings"
+            element={
+              <PrivateRoute>
+
+                <AdminLayout>
+
+                  <Settings />
+
+                </AdminLayout>
+
+              </PrivateRoute>
+            }
+          />
 
         </Routes>
+
       </BrowserRouter>
+
     </AuthProvider>
   );
 }
 
 export default App;
+

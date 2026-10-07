@@ -36,7 +36,7 @@ const Users = () => {
           {
             id: 1,
             nom: "Admin",
-            email: "admin@mail.com",
+            email: "admin@gmail.com",
             role: "Admin",
             statut: "Actif",
             photo: "",
