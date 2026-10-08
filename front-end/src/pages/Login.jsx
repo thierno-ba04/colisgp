@@ -466,7 +466,7 @@ function Login() {
                       MOT DE PASSE OUBLIÉ
                   ================================= */}
 
-                  <div className="forgot-password">
+                  {/* <div className="forgot-password">
 
                     <button
                       type="button"
@@ -477,7 +477,7 @@ function Login() {
                       Mot de passe oublié ?
                     </button>
 
-                  </div>
+                  </div> */}
 
                   {/* ================================
                       BOUTON
